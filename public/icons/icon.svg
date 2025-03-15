@@ -7,6 +7,12 @@
       <stop offset="100%" style="stop-color:#000000"/>
     </linearGradient>
     
+    <!-- Градиент для большой буквы T -->
+    <linearGradient id="tGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a90e2"/>
+      <stop offset="100%" style="stop-color:#357abd"/>
+    </linearGradient>
+    
     <!-- Градиент для огня -->
     <radialGradient id="fireGradient" cx="50%" cy="50%" r="75%" fx="50%" fy="50%">
       <stop offset="0%" style="stop-color:#ffdd00"/>
@@ -46,6 +52,16 @@
 
   <!-- Фоновый прямоугольник -->
   <rect width="512" height="512" fill="url(#bgGradient)" rx="128" ry="128"/>
+  
+  <!-- Большая буква T на заднем плане -->
+  <text x="256" y="280" 
+    font-family="Arial Black, sans-serif" 
+    font-size="400" 
+    text-anchor="middle" 
+    dominant-baseline="middle" 
+    fill="url(#tGradient)" 
+    opacity="0.3"
+    filter="url(#textGlow)">Т</text>
   
   <!-- Внешний круг с огнем -->
   <g>
@@ -116,21 +132,21 @@
     </circle>
   </g>
   
-  <!-- Текст с обводкой -->
-  <text x="256" y="256" 
+  <!-- Надпись РСП внизу -->
+  <text x="256" y="400" 
     font-family="Arial Black, sans-serif" 
-    font-size="140" 
+    font-size="80" 
     text-anchor="middle" 
     dominant-baseline="middle" 
     font-weight="bold">
     <!-- Обводка -->
-    <tspan x="256" y="256" 
+    <tspan x="256" y="400" 
       fill="none" 
       stroke="#000000" 
-      stroke-width="8">РСП-Т</tspan>
+      stroke-width="4">РСП</tspan>
     <!-- Основной текст -->
-    <tspan x="256" y="256" 
+    <tspan x="256" y="400" 
       fill="#ff4d00" 
-      filter="url(#textGlow)">РСП-Т</tspan>
+      filter="url(#textGlow)">РСП</tspan>
   </text>
 </svg> 
