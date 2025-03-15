@@ -29,7 +29,10 @@ function App() {
 
       <main className="main-content">
         <section className="welcome-section">
-          <h2>Добро пожаловать в РСП-Т</h2>
+          <div className="welcome-text">
+            <h2>Добро пожаловать в</h2>
+            <h1 className="company-name">РСП-Т</h1>
+          </div>
           <p>Выберите раздел для начала работы</p>
         </section>
       </main>

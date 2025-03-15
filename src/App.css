@@ -3,6 +3,10 @@
   --background-color: rgba(0, 0, 0, 0.8);
   --text-color: #fff;
   --header-height: 60px;
+  --accent-color: #ff4d00;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.8);
+  --bg-light: rgba(0, 0, 0, 0.85);
 }
 
 .app {
@@ -35,7 +39,7 @@ body {
   left: 0;
   right: 0;
   height: var(--header-height);
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: var(--bg-light);
   color: white;
   box-shadow: 0 2px 4px rgba(255, 77, 0, 0.2);
   z-index: 1000;
@@ -55,6 +59,7 @@ body {
 .header h1 {
   margin: 0;
   font-size: 1.5rem;
+  color: var(--primary-color);
 }
 
 .menu-button {
@@ -71,7 +76,7 @@ body {
   display: block;
   width: 24px;
   height: 2px;
-  background-color: white;
+  background-color: var(--primary-color);
   position: relative;
 }
 
@@ -81,7 +86,7 @@ body {
   position: absolute;
   width: 24px;
   height: 2px;
-  background-color: white;
+  background-color: var(--primary-color);
   transition: transform 0.3s ease;
 }
 
@@ -99,7 +104,7 @@ body {
   left: 0;
   width: 250px;
   height: calc(100vh - var(--header-height));
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: var(--bg-light);
   transform: translateX(-100%);
   transition: transform 0.3s ease;
   box-shadow: 2px 0 4px rgba(255, 77, 0, 0.2);
@@ -118,7 +123,7 @@ body {
 }
 
 .navigation li {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .navigation a {
@@ -137,30 +142,81 @@ body {
   padding: calc(var(--header-height) + 20px) 20px 20px;
   max-width: 1200px;
   margin: 0 auto;
+  min-height: calc(100vh - var(--header-height));
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .welcome-section {
-  background-color: rgba(0, 0, 0, 0.85);
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(255, 77, 0, 0.1);
   text-align: center;
+  padding: 2rem;
+  background-color: var(--bg-light);
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 1rem;
+  width: 100%;
+  max-width: 600px;
   backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 77, 0, 0.2);
 }
 
-.welcome-section h2 {
-  color: var(--primary-color);
-  margin-bottom: 15px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+.welcome-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.welcome-text h2 {
+  font-size: 1.8rem;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.welcome-text .company-name {
+  font-size: 3.5rem;
+  color: var(--accent-color);
+  margin: 0;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.welcome-section p {
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  color: var(--text-secondary);
 }
 
 @media (max-width: 768px) {
+  .app::before {
+    background-size: 150% auto;
+    background-position: center 20%;
+  }
+
   .header-content {
     padding: 0 15px;
   }
   
   .main-content {
     padding: calc(var(--header-height) + 15px) 15px 15px;
+  }
+
+  .welcome-section {
+    margin: 0.5rem;
+    padding: 1.5rem;
+  }
+
+  .welcome-text h2 {
+    font-size: 1.5rem;
+  }
+
+  .welcome-text .company-name {
+    font-size: 2.8rem;
+  }
+
+  .welcome-section p {
+    font-size: 1.1rem;
+    margin-top: 1rem;
   }
 }
