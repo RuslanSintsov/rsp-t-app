@@ -8,15 +8,26 @@
     </linearGradient>
     
     <!-- Градиент для огня -->
-    <radialGradient id="fireGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-      <stop offset="0%" style="stop-color:#ff6b00"/>
-      <stop offset="50%" style="stop-color:#ff4d00"/>
+    <radialGradient id="fireGradient" cx="50%" cy="50%" r="65%" fx="50%" fy="50%">
+      <stop offset="0%" style="stop-color:#ffdd00"/>
+      <stop offset="40%" style="stop-color:#ff6b00"/>
+      <stop offset="70%" style="stop-color:#ff4d00"/>
       <stop offset="100%" style="stop-color:#ff2b00"/>
     </radialGradient>
     
-    <!-- Фильтр для свечения -->
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="4"/>
+    <!-- Фильтр для свечения огня -->
+    <filter id="fireGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8"/>
+      <feColorMatrix type="matrix" values="
+        1 0 0 0 1
+        0 0.6 0 0 0.2
+        0 0 0.2 0 0
+        0 0 0 0.8 0"/>
+    </filter>
+    
+    <!-- Фильтр для свечения текста -->
+    <filter id="textGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
       <feColorMatrix type="matrix" values="
         1 0 0 0 1
         0 0.5 0 0 0.2
@@ -28,20 +39,58 @@
   <!-- Фоновый прямоугольник -->
   <rect width="512" height="512" fill="url(#bgGradient)" rx="128" ry="128"/>
   
-  <!-- Внешний круг -->
-  <circle cx="256" cy="256" r="180" 
-    stroke="url(#fireGradient)" 
-    stroke-width="20" 
-    fill="none"
-    filter="url(#glow)"/>
+  <!-- Внешний круг с огнем -->
+  <g>
+    <!-- Основной круг -->
+    <circle cx="256" cy="256" r="180" 
+      stroke="url(#fireGradient)" 
+      stroke-width="30" 
+      fill="none"
+      filter="url(#fireGlow)">
+      <!-- Анимация пульсации -->
+      <animate attributeName="stroke-width" 
+        values="30;40;30" 
+        dur="2s" 
+        repeatCount="indefinite"/>
+      <animate attributeName="stroke-opacity" 
+        values="0.8;1;0.8" 
+        dur="2s" 
+        repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Дополнительный внешний круг для эффекта огня -->
+    <circle cx="256" cy="256" r="195" 
+      stroke="url(#fireGradient)" 
+      stroke-width="5" 
+      fill="none"
+      opacity="0.5"
+      filter="url(#fireGlow)">
+      <animate attributeName="r" 
+        values="195;200;195" 
+        dur="3s" 
+        repeatCount="indefinite"/>
+      <animate attributeName="opacity" 
+        values="0.5;0.8;0.5" 
+        dur="3s" 
+        repeatCount="indefinite"/>
+    </circle>
+  </g>
   
-  <!-- Текст -->
+  <!-- Текст с обводкой -->
   <text x="256" y="256" 
     font-family="Arial Black, sans-serif" 
     font-size="140" 
-    fill="#ff4d00" 
     text-anchor="middle" 
     dominant-baseline="middle" 
-    font-weight="bold"
-    filter="url(#glow)">РСП-Т</text>
+    font-weight="bold">
+    <!-- Обводка -->
+    <tspan x="256" y="256" 
+      fill="none" 
+      stroke="#000000" 
+      stroke-width="8">РСП-Т</tspan>
+    <!-- Основной текст -->
+    <tspan x="256" y="256" 
+      fill="#ff4d00" 
+      filter="url(#textGlow)">РСП-Т</tspan>
+  </text>
 </svg> 
