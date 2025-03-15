@@ -9,35 +9,15 @@
     
     <!-- Градиент для большой буквы T -->
     <linearGradient id="tGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#4a90e2"/>
-      <stop offset="100%" style="stop-color:#357abd"/>
+      <stop offset="0%" style="stop-color:#2196f3"/>
+      <stop offset="100%" style="stop-color:#1976d2"/>
     </linearGradient>
-    
-    <!-- Градиент для огня -->
-    <radialGradient id="fireGradient" cx="50%" cy="50%" r="75%" fx="50%" fy="50%">
-      <stop offset="0%" style="stop-color:#ffdd00"/>
-      <stop offset="30%" style="stop-color:#ff8800"/>
-      <stop offset="60%" style="stop-color:#ff4d00"/>
-      <stop offset="100%" style="stop-color:#ff2b00"/>
-    </radialGradient>
 
-    <!-- Градиент для внешнего огня -->
-    <radialGradient id="outerFireGradient" cx="50%" cy="50%" r="85%" fx="50%" fy="50%">
-      <stop offset="0%" style="stop-color:#ffdd00"/>
-      <stop offset="40%" style="stop-color:#ff8800"/>
-      <stop offset="70%" style="stop-color:#ff4d00"/>
-      <stop offset="100%" style="stop-color:#ff2b00;stop-opacity:0"/>
-    </radialGradient>
-    
-    <!-- Фильтр для свечения огня -->
-    <filter id="fireGlow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="10"/>
-      <feColorMatrix type="matrix" values="
-        1 0 0 0 1
-        0 0.6 0 0 0.2
-        0 0 0.2 0 0
-        0 0 0 0.8 0"/>
-    </filter>
+    <!-- Градиент для РСП -->
+    <linearGradient id="rspGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff4d00"/>
+      <stop offset="100%" style="stop-color:#ff2b00"/>
+    </linearGradient>
     
     <!-- Фильтр для свечения текста -->
     <filter id="textGlow" x="-50%" y="-50%" width="200%" height="200%">
@@ -53,100 +33,32 @@
   <!-- Фоновый прямоугольник -->
   <rect width="512" height="512" fill="url(#bgGradient)" rx="128" ry="128"/>
   
-  <!-- Большая буква T на заднем плане -->
-  <text x="256" y="280" 
-    font-family="Arial Black, sans-serif" 
-    font-size="400" 
+  <!-- Большая буква T -->
+  <text x="256" y="300" 
+    font-family="Roboto, Arial Black, sans-serif" 
+    font-size="420" 
     text-anchor="middle" 
     dominant-baseline="middle" 
     fill="url(#tGradient)" 
-    opacity="0.3"
-    filter="url(#textGlow)">Т</text>
-  
-  <!-- Внешний круг с огнем -->
-  <g>
-    <!-- Внешний огненный ореол -->
-    <circle cx="256" cy="256" r="220" 
-      stroke="url(#outerFireGradient)" 
-      stroke-width="40" 
-      fill="none"
-      opacity="0.6"
-      filter="url(#fireGlow)">
-      <animate attributeName="stroke-width" 
-        values="40;50;40" 
-        dur="3s" 
-        repeatCount="indefinite"/>
-      <animate attributeName="opacity" 
-        values="0.6;0.8;0.6" 
-        dur="3s" 
-        repeatCount="indefinite"/>
-    </circle>
-
-    <!-- Основной круг -->
-    <circle cx="256" cy="256" r="180" 
-      stroke="url(#fireGradient)" 
-      stroke-width="35" 
-      fill="none"
-      filter="url(#fireGlow)">
-      <animate attributeName="stroke-width" 
-        values="35;45;35" 
-        dur="2s" 
-        repeatCount="indefinite"/>
-      <animate attributeName="stroke-opacity" 
-        values="0.8;1;0.8" 
-        dur="2s" 
-        repeatCount="indefinite"/>
-    </circle>
-    
-    <!-- Дополнительные огненные круги -->
-    <circle cx="256" cy="256" r="195" 
-      stroke="url(#fireGradient)" 
-      stroke-width="8" 
-      fill="none"
-      opacity="0.7"
-      filter="url(#fireGlow)">
-      <animate attributeName="r" 
-        values="195;205;195" 
-        dur="2.5s" 
-        repeatCount="indefinite"/>
-      <animate attributeName="opacity" 
-        values="0.7;0.9;0.7" 
-        dur="2.5s" 
-        repeatCount="indefinite"/>
-    </circle>
-
-    <circle cx="256" cy="256" r="210" 
-      stroke="url(#outerFireGradient)" 
-      stroke-width="5" 
-      fill="none"
-      opacity="0.5"
-      filter="url(#fireGlow)">
-      <animate attributeName="r" 
-        values="210;215;210" 
-        dur="3.5s" 
-        repeatCount="indefinite"/>
-      <animate attributeName="opacity" 
-        values="0.5;0.7;0.5" 
-        dur="3.5s" 
-        repeatCount="indefinite"/>
-    </circle>
-  </g>
+    opacity="0.85"
+    filter="url(#textGlow)"
+    style="font-weight: 900; font-style: normal;">Т</text>
   
   <!-- Надпись РСП внизу -->
-  <text x="256" y="400" 
+  <text x="256" y="440" 
     font-family="Arial Black, sans-serif" 
     font-size="80" 
     text-anchor="middle" 
     dominant-baseline="middle" 
     font-weight="bold">
     <!-- Обводка -->
-    <tspan x="256" y="400" 
+    <tspan x="256" y="440" 
       fill="none" 
       stroke="#000000" 
       stroke-width="4">РСП</tspan>
     <!-- Основной текст -->
-    <tspan x="256" y="400" 
-      fill="#ff4d00" 
+    <tspan x="256" y="440" 
+      fill="url(#rspGradient)" 
       filter="url(#textGlow)">РСП</tspan>
   </text>
 </svg> 
