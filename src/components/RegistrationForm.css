@@ -4,70 +4,223 @@
   align-items: center;
   min-height: 100vh;
   padding: 20px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.05) 100%);
 }
 
 .registration-form {
   background: white;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 400px;
+  max-width: 450px;
+  transform: translateY(0);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.registration-form:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
 }
 
 .registration-form h2 {
   text-align: center;
   color: #333;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  font-weight: 600;
 }
 
 .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  position: relative;
 }
 
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #666;
+  color: #555;
+  font-weight: 500;
+  font-size: 0.95rem;
 }
 
 .form-group input {
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e1e1e1;
+  border-radius: 8px;
   font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: #fff;
 }
 
 .form-group input:focus {
   outline: none;
   border-color: #0066cc;
-  box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2);
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+.form-group input.error {
+  border-color: #dc3545;
+  background-color: #fff8f8;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+  display: block;
+  animation: slideIn 0.3s ease;
+}
+
+.password-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  font-size: 1.2rem;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.toggle-password:hover {
+  color: #333;
 }
 
 .submit-button {
   width: 100%;
-  padding: 0.75rem;
-  background-color: #0066cc;
+  padding: 1rem;
+  background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
   color: white;
   border: none;
-  border-radius: 4px;
-  font-size: 1rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .submit-button:hover {
-  background-color: #0052a3;
+  background: linear-gradient(135deg, #0052a3 0%, #004080 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2);
 }
 
 .submit-button:active {
-  background-color: #004080;
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 102, 204, 0.2);
+}
+
+.submit-button.loading {
+  background: #0066cc;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.loader {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
+  z-index: 1000;
+  animation: slideInRight 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.notification.success {
+  background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+}
+
+.notification.error {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+}
+
+.notification.fade-out {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100px);
+  }
 }
 
 @media (max-width: 480px) {
   .registration-form {
     padding: 1.5rem;
+  }
+
+  .registration-form h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group input {
+    padding: 0.6rem 0.8rem;
+  }
+
+  .submit-button {
+    padding: 0.8rem;
+    font-size: 1rem;
   }
 } 

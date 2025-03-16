@@ -6,6 +6,7 @@ import RegistrationForm from './components/RegistrationForm'
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showRegistration, setShowRegistration] = useState(false)
+  const [showLogin, setShowLogin] = useState(false)
 
   return (
     <div className="app">
@@ -15,9 +16,21 @@ function App() {
           <div className="header-buttons">
             <button 
               className="auth-button"
-              onClick={() => setShowRegistration(!showRegistration)}
+              onClick={() => {
+                setShowRegistration(!showRegistration)
+                setShowLogin(false)
+              }}
             >
               {showRegistration ? 'Закрыть' : 'Регистрация'}
+            </button>
+            <button 
+              className="auth-button"
+              onClick={() => {
+                setShowLogin(!showLogin)
+                setShowRegistration(false)
+              }}
+            >
+              {showLogin ? 'Закрыть' : 'Войти'}
             </button>
             <button 
               className="menu-button"
@@ -41,13 +54,32 @@ function App() {
       <main className="main-content">
         {showRegistration ? (
           <RegistrationForm />
+        ) : showLogin ? (
+          <div className="login-placeholder">
+            <h2>Форма входа</h2>
+            <p>Здесь будет форма входа</p>
+          </div>
         ) : (
           <section className="welcome-section">
             <div className="welcome-text">
               <h2>Добро пожаловать в</h2>
               <Logo />
             </div>
-            <p>Выберите раздел для начала работы</p>
+            <p>Войдите или зарегистрируйтесь для начала работы</p>
+            <div className="welcome-buttons">
+              <button 
+                className="welcome-button login"
+                onClick={() => setShowLogin(true)}
+              >
+                Войти
+              </button>
+              <button 
+                className="welcome-button register"
+                onClick={() => setShowRegistration(true)}
+              >
+                Зарегистрироваться
+              </button>
+            </div>
           </section>
         )}
       </main>
