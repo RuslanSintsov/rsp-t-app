@@ -1,54 +1,97 @@
-# React + TypeScript + Vite
+# РСП-Т
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Веб-приложение для управления производственными процессами РСП-Т.
 
-Currently, two official plugins are available:
+## Требования
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Node.js v18 или выше
+- npm v9 или выше
 
-## Expanding the ESLint configuration
+## Установка
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+1. Клонируйте репозиторий:
+```bash
+git clone https://github.com/your-username/rsp-t-app.git
+cd rsp-t-app
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+2. Установите зависимости:
+```bash
+npm install
 ```
+
+3. Создайте файл .env на основе .env.example:
+```bash
+cp .env.example .env
+```
+
+4. Отредактируйте .env файл и укажите ваши настройки:
+- `REACT_APP_API_URL` - URL API сервера
+- `REACT_APP_VERSION` - версия приложения
+
+## Запуск
+
+### Режим разработки
+```bash
+npm start
+```
+
+### Сборка для production
+```bash
+npm run build
+```
+
+## Функциональность
+
+### Аутентификация и авторизация
+- Регистрация пользователей
+- Вход в систему
+- Система ролей и прав доступа
+
+### Роли пользователей
+- Генеральный директор
+- Технический директор
+- Главный инженер
+- Технолог
+- Мастер
+- Лаборант
+- Специалист по ОТ
+
+## Разработка
+
+### Структура проекта
+```
+src/
+├── components/     # React компоненты
+├── services/      # Сервисы для работы с API
+├── context/       # React контексты
+├── hooks/         # Пользовательские хуки
+├── utils/         # Вспомогательные функции
+└── assets/        # Статические ресурсы
+```
+
+### Технологии
+- React
+- TypeScript
+- Axios
+- React Router
+- Context API
+
+## Дизайн
+
+Приложение использует современный, минималистичный дизайн с акцентом на удобство использования:
+- Адаптивный интерфейс
+- Светлая цветовая схема
+- Понятная навигация
+- Информативные сообщения об ошибках
+
+## Безопасность
+
+- Защищенные маршруты
+- Шифрование данных при передаче
+- Безопасное хранение токенов
+- Защита от XSS и CSRF атак
+
+## Лицензия
+
+Проприетарное ПО. Все права защищены.
