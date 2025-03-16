@@ -14,7 +14,9 @@
   color: var(--accent-color);
   position: relative;
   z-index: 2;
-  transform: translateY(-20px); /* Поднимаем текст выше */
+  font-family: 'Arial', sans-serif;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .ladle {
@@ -38,18 +40,18 @@
 
 .ladle-left {
   left: 40px;
-  transform: rotate(180deg) translateY(-30px); /* Переворачиваем и поднимаем левый ковш */
+  transform: rotate(180deg);
 }
 
 .ladle-right {
   right: 40px;
-  transform: rotate(180deg) translateY(-30px); /* Переворачиваем и поднимаем правый ковш */
+  transform: rotate(180deg);
 }
 
 .metal-stream {
   position: absolute;
   width: 8px;
-  height: 0; /* Изначально поток металла скрыт */
+  height: 0;
   background: linear-gradient(to bottom, var(--accent-color), transparent);
   z-index: 1;
   opacity: 0;
@@ -66,8 +68,125 @@
   top: 30px;
 }
 
-/* Анимация потока металла при наведении на логотип */
 .logo-container:hover .metal-stream {
   height: 40px;
   opacity: 1;
+}
+
+/* Стили для логотипа в шапке */
+.header .logo-container {
+  height: 50px;
+  width: 150px;
+}
+
+.header .rsp-text {
+  font-size: 1.5rem;
+}
+
+.header .ladle {
+  width: 30px;
+  height: 20px;
+}
+
+.header .ladle::before {
+  width: 5px;
+  height: 25px;
+  bottom: 10px;
+  left: 12px;
+}
+
+.header .ladle-left {
+  left: 20px;
+}
+
+.header .ladle-right {
+  right: 20px;
+}
+
+/* Стили для логотипа на главной странице */
+.welcome-text .logo-container {
+  height: 160px;
+  width: 400px;
+}
+
+.welcome-text .rsp-text {
+  font-size: 3.5rem;
+}
+
+.welcome-text .ladle {
+  width: 80px;
+  height: 50px;
+}
+
+.welcome-text .ladle::before {
+  width: 15px;
+  height: 70px;
+  bottom: 30px;
+  left: 32px;
+}
+
+.welcome-text .ladle-left {
+  left: 60px;
+}
+
+.welcome-text .ladle-right {
+  right: 60px;
+}
+
+@media (max-width: 768px) {
+  .welcome-text .logo-container {
+    height: 120px;
+    width: 300px;
+  }
+
+  .welcome-text .rsp-text {
+    font-size: 2.8rem;
+  }
+
+  .welcome-text .ladle {
+    width: 60px;
+    height: 40px;
+  }
+
+  .welcome-text .ladle::before {
+    width: 10px;
+    height: 50px;
+    bottom: 20px;
+    left: 25px;
+  }
+
+  .welcome-text .ladle-left {
+    left: 40px;
+  }
+
+  .welcome-text .ladle-right {
+    right: 40px;
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-text {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  font-family: 'Arial', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Стили для логотипа в шапке */
+.header .logo-text {
+  font-size: 1.5rem;
+}
+
+/* Стили для логотипа на главной странице */
+.welcome-text .logo-text {
+  font-size: 3.5rem;
+  margin: 0.5rem 0;
 } 

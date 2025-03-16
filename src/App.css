@@ -12,6 +12,7 @@
 .app {
   min-height: 100vh;
   position: relative;
+  font-family: 'Arial', sans-serif;
 }
 
 .app::before {
@@ -70,32 +71,30 @@ body {
   padding: 8px;
   cursor: pointer;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.menu-icon {
+.menu-icon,
+.menu-icon::before,
+.menu-icon::after {
   display: block;
   width: 24px;
   height: 2px;
   background-color: var(--primary-color);
-  position: relative;
-}
-
-.menu-icon::before,
-.menu-icon::after {
-  content: '';
   position: absolute;
-  width: 24px;
-  height: 2px;
-  background-color: var(--primary-color);
   transition: transform 0.3s ease;
 }
 
 .menu-icon::before {
-  top: -6px;
+  content: '';
+  top: -8px;
 }
 
 .menu-icon::after {
-  bottom: -6px;
+  content: '';
+  bottom: -8px;
 }
 
 .navigation {
@@ -167,12 +166,15 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
+  font-family: 'Arial', sans-serif;
 }
 
 .welcome-text h2 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   color: var(--text-primary);
   margin: 0;
+  font-weight: normal;
+  font-family: 'Arial', sans-serif;
 }
 
 .welcome-text .company-name {
@@ -210,7 +212,7 @@ body {
   }
 
   .welcome-text h2 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
 
   .welcome-text .company-name {
@@ -221,4 +223,24 @@ body {
     font-size: 1.1rem;
     margin-top: 1rem;
   }
+}
+
+.header-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.auth-button {
+  padding: 0.5rem 1rem;
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.auth-button:hover {
+  background-color: #0052a3;
 }

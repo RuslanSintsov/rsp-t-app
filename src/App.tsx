@@ -1,21 +1,31 @@
 import { useState } from 'react'
 import './App.css'
 import Logo from './components/Logo'
+import RegistrationForm from './components/RegistrationForm'
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [showRegistration, setShowRegistration] = useState(false)
 
   return (
     <div className="app">
       <header className="header">
         <div className="header-content">
           <Logo />
-          <button 
-            className="menu-button"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            <span className="menu-icon"></span>
-          </button>
+          <div className="header-buttons">
+            <button 
+              className="auth-button"
+              onClick={() => setShowRegistration(!showRegistration)}
+            >
+              {showRegistration ? 'Закрыть' : 'Регистрация'}
+            </button>
+            <button 
+              className="menu-button"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              <span className="menu-icon"></span>
+            </button>
+          </div>
         </div>
       </header>
 
@@ -29,13 +39,17 @@ function App() {
       </nav>
 
       <main className="main-content">
-        <section className="welcome-section">
-          <div className="welcome-text">
-            <h2>Добро пожаловать в</h2>
-            <Logo />
-          </div>
-          <p>Выберите раздел для начала работы</p>
-        </section>
+        {showRegistration ? (
+          <RegistrationForm />
+        ) : (
+          <section className="welcome-section">
+            <div className="welcome-text">
+              <h2>Добро пожаловать в</h2>
+              <Logo />
+            </div>
+            <p>Выберите раздел для начала работы</p>
+          </section>
+        )}
       </main>
     </div>
   )
