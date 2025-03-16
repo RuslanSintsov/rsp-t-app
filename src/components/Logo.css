@@ -1,0 +1,73 @@
+.logo-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.rsp-text {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--accent-color);
+  position: relative;
+  z-index: 2;
+  transform: translateY(-20px); /* Поднимаем текст выше */
+}
+
+.ladle {
+  position: absolute;
+  width: 60px;
+  height: 40px;
+  background-color: var(--accent-color);
+  border-radius: 10px;
+  transform-origin: center;
+}
+
+.ladle::before {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 50px;
+  background-color: var(--accent-color);
+  bottom: 20px;
+  left: 25px;
+}
+
+.ladle-left {
+  left: 40px;
+  transform: rotate(180deg) translateY(-30px); /* Переворачиваем и поднимаем левый ковш */
+}
+
+.ladle-right {
+  right: 40px;
+  transform: rotate(180deg) translateY(-30px); /* Переворачиваем и поднимаем правый ковш */
+}
+
+.metal-stream {
+  position: absolute;
+  width: 8px;
+  height: 0; /* Изначально поток металла скрыт */
+  background: linear-gradient(to bottom, var(--accent-color), transparent);
+  z-index: 1;
+  opacity: 0;
+  transition: height 0.5s, opacity 0.5s;
+}
+
+.metal-left {
+  left: 65px;
+  top: 30px;
+}
+
+.metal-right {
+  right: 65px;
+  top: 30px;
+}
+
+/* Анимация потока металла при наведении на логотип */
+.logo-container:hover .metal-stream {
+  height: 40px;
+  opacity: 1;
+} 

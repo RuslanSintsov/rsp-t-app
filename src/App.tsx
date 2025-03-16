@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import Logo from './components/Logo'
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -8,7 +9,7 @@ function App() {
     <div className="app">
       <header className="header">
         <div className="header-content">
-          <h1>РСП-Т</h1>
+          <Logo />
           <button 
             className="menu-button"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -31,7 +32,7 @@ function App() {
         <section className="welcome-section">
           <div className="welcome-text">
             <h2>Добро пожаловать в</h2>
-            <h1 className="company-name">РСП-Т</h1>
+            <Logo />
           </div>
           <p>Выберите раздел для начала работы</p>
         </section>
