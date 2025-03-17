@@ -6,12 +6,27 @@ import LoginForm from './components/LoginForm'
 import { useAuth } from './context/AuthContext'
 
 function App() {
-  const { user, isAuthenticated, logout } = useAuth()
+  const { user, isAuthenticated, logout, isLoading } = useAuth()
   const [showRegistration, setShowRegistration] = useState(false)
   const [showLogin, setShowLogin] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleLoginSuccess = () => {
     setShowLogin(false)
+    setError(null)
+  }
+
+  const handleError = (message: string) => {
+    setError(message)
+  }
+
+  if (isLoading) {
+    return (
+      <div className="loading-screen">
+        <div className="loading-spinner"></div>
+        <p>Загрузка...</p>
+      </div>
+    )
   }
 
   return (
@@ -48,6 +63,13 @@ function App() {
       </header>
 
       <main className="main-content">
+        {error && (
+          <div className="error-message">
+            {error}
+            <button onClick={() => setError(null)}>✕</button>
+          </div>
+        )}
+        
         {!isAuthenticated ? (
           <div className="welcome-section">
             <h1>Добро пожаловать в РСП-Т</h1>
@@ -69,7 +91,6 @@ function App() {
           </div>
         ) : (
           <div className="dashboard">
-            {/* Здесь будет контент для авторизованных пользователей */}
             <h2>Добро пожаловать, {user?.firstName}!</h2>
             <p>Ваша роль: {user?.role}</p>
           </div>
@@ -79,7 +100,10 @@ function App() {
       {showRegistration && (
         <div className="modal">
           <div className="modal-content">
-            <RegistrationForm onClose={() => setShowRegistration(false)} />
+            <RegistrationForm 
+              onClose={() => setShowRegistration(false)}
+              onError={handleError}
+            />
           </div>
         </div>
       )}
@@ -90,6 +114,7 @@ function App() {
             <LoginForm
               onClose={() => setShowLogin(false)}
               onSuccess={handleLoginSuccess}
+              onError={handleError}
             />
           </div>
         </div>

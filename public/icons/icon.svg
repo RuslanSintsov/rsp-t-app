@@ -15,7 +15,7 @@
       <stop offset="80%" style="stop-color:#331f00"/>
       <stop offset="100%" style="stop-color:#0d0700"/>
     </linearGradient>
-
+    
     <!-- Градиент для огня -->
     <radialGradient id="fireGradient" cx="50%" cy="50%" r="75%" fx="50%" fy="50%">
       <stop offset="0%" style="stop-color:#ffd700"/>
@@ -115,7 +115,7 @@
 
   <!-- Фоновый прямоугольник -->
   <rect width="512" height="512" fill="url(#bgGradient)" rx="128" ry="128"/>
-
+  
   <!-- Внешний круг с огнем -->
   <g>
     <!-- Внешний огненный ореол -->
@@ -251,7 +251,7 @@
     
     <!-- Буква П -->
     <path d="M60,-5 v70 M90,-5 v70 M60,-5 h30"
-      fill="none"
+      fill="none" 
       stroke="url(#rspGradient)"
       stroke-width="14"
       stroke-linecap="square"

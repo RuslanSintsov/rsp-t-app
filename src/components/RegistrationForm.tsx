@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
+import { authApi } from '../services/api';
 import './RegistrationForm.css';
+
+interface RegistrationFormProps {
+  onClose: () => void;
+  onError: (message: string) => void;
+}
 
 interface RegistrationFormData {
   email: string;
@@ -21,7 +27,7 @@ interface ValidationErrors {
   position?: string;
 }
 
-const RegistrationForm: React.FC = () => {
+const RegistrationForm: React.FC<RegistrationFormProps> = ({ onClose, onError }) => {
   const [formData, setFormData] = useState<RegistrationFormData>({
     email: '',
     password: '',
@@ -123,52 +129,20 @@ const RegistrationForm: React.FC = () => {
 
     setIsLoading(true);
     try {
-      const response = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+      const { confirmPassword, ...registrationData } = formData;
+      await authApi.register({
+        ...registrationData,
+        username: formData.email,
+        role: 'user',
+        department: 'Не указан'
       });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        // Успешная регистрация
-        showNotification('success', 'Регистрация успешна! Ожидайте подтверждения администратора.');
-        // Очищаем форму
-        setFormData({
-          email: '',
-          password: '',
-          confirmPassword: '',
-          firstName: '',
-          lastName: '',
-          phone: '',
-          position: ''
-        });
-      } else {
-        showNotification('error', data.message || 'Ошибка при регистрации');
-      }
-    } catch (error) {
-      console.error('Ошибка при отправке формы:', error);
-      showNotification('error', 'Произошла ошибка при регистрации');
+      onClose();
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Ошибка при регистрации';
+      onError(errorMessage);
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const showNotification = (type: 'success' | 'error', message: string) => {
-    const notification = document.createElement('div');
-    notification.className = `notification ${type}`;
-    notification.textContent = message;
-    document.body.appendChild(notification);
-
-    setTimeout(() => {
-      notification.classList.add('fade-out');
-      setTimeout(() => {
-        document.body.removeChild(notification);
-      }, 300);
-    }, 3000);
   };
 
   return (
@@ -185,6 +159,7 @@ const RegistrationForm: React.FC = () => {
             value={formData.email}
             onChange={handleChange}
             className={errors.email ? 'error' : ''}
+            disabled={isLoading}
             required
           />
           {errors.email && <span className="error-message">{errors.email}</span>}
@@ -200,12 +175,14 @@ const RegistrationForm: React.FC = () => {
               value={formData.password}
               onChange={handleChange}
               className={errors.password ? 'error' : ''}
+              disabled={isLoading}
               required
             />
             <button
               type="button"
               className="toggle-password"
               onClick={() => setShowPassword(!showPassword)}
+              disabled={isLoading}
             >
               {showPassword ? '👁️' : '👁️‍🗨️'}
             </button>
@@ -223,12 +200,14 @@ const RegistrationForm: React.FC = () => {
               value={formData.confirmPassword}
               onChange={handleChange}
               className={errors.confirmPassword ? 'error' : ''}
+              disabled={isLoading}
               required
             />
             <button
               type="button"
               className="toggle-password"
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              disabled={isLoading}
             >
               {showConfirmPassword ? '👁️' : '👁️‍🗨️'}
             </button>
@@ -245,6 +224,7 @@ const RegistrationForm: React.FC = () => {
             value={formData.firstName}
             onChange={handleChange}
             className={errors.firstName ? 'error' : ''}
+            disabled={isLoading}
             required
           />
           {errors.firstName && <span className="error-message">{errors.firstName}</span>}
@@ -259,6 +239,7 @@ const RegistrationForm: React.FC = () => {
             value={formData.lastName}
             onChange={handleChange}
             className={errors.lastName ? 'error' : ''}
+            disabled={isLoading}
             required
           />
           {errors.lastName && <span className="error-message">{errors.lastName}</span>}
@@ -272,8 +253,8 @@ const RegistrationForm: React.FC = () => {
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            placeholder="+79001234567"
             className={errors.phone ? 'error' : ''}
+            disabled={isLoading}
             required
           />
           {errors.phone && <span className="error-message">{errors.phone}</span>}
@@ -288,22 +269,29 @@ const RegistrationForm: React.FC = () => {
             value={formData.position}
             onChange={handleChange}
             className={errors.position ? 'error' : ''}
+            disabled={isLoading}
             required
           />
           {errors.position && <span className="error-message">{errors.position}</span>}
         </div>
 
-        <button 
-          type="submit" 
-          className={`submit-button ${isLoading ? 'loading' : ''}`}
-          disabled={isLoading}
-        >
-          {isLoading ? (
-            <span className="loader"></span>
-          ) : (
-            'Зарегистрироваться'
-          )}
-        </button>
+        <div className="form-actions">
+          <button 
+            type="submit" 
+            className="submit-button"
+            disabled={isLoading}
+          >
+            {isLoading ? 'Регистрация...' : 'Зарегистрироваться'}
+          </button>
+          <button 
+            type="button" 
+            onClick={onClose}
+            className="cancel-button"
+            disabled={isLoading}
+          >
+            Отмена
+          </button>
+        </div>
       </form>
     </div>
   );

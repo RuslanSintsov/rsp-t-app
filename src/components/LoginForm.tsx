@@ -5,15 +5,15 @@ import './LoginForm.css';
 interface LoginFormProps {
   onClose: () => void;
   onSuccess: () => void;
+  onError: (message: string) => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ onClose, onSuccess }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ onClose, onSuccess, onError }) => {
   const [formData, setFormData] = useState<ILoginData>({
     email: '',
     password: ''
   });
 
-  const [error, setError] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,18 +26,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose, onSuccess }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
     setIsLoading(true);
 
     try {
       await authApi.login(formData);
       onSuccess();
     } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError('Ошибка при входе в систему');
-      }
+      const errorMessage = err instanceof Error ? err.message : 'Ошибка при входе в систему';
+      onError(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -55,6 +51,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose, onSuccess }) => {
             value={formData.email}
             onChange={handleChange}
             disabled={isLoading}
+            required
           />
         </div>
         <div className="form-group">
@@ -65,9 +62,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose, onSuccess }) => {
             value={formData.password}
             onChange={handleChange}
             disabled={isLoading}
+            required
           />
         </div>
-        {error && <div className="error-message">{error}</div>}
         <div className="form-actions">
           <button 
             type="submit" 
