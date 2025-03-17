@@ -1,0 +1,1 @@
+{"name":"РСП-Т","short_name":"РСП-Т","start_url":"/rsp-t-app/","display":"standalone","background_color":"#ffffff","lang":"en","scope":"/rsp-t-app/","description":"Приложение для работы с РСП-Т","theme_color":"#ff4d00","icons":[{"src":"icons/icon-192x192.png","sizes":"192x192","type":"image/png"},{"src":"icons/icon-512x512.png","sizes":"512x512","type":"image/png"}]}

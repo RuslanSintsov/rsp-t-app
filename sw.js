@@ -1,22 +1,2 @@
-const CACHE_NAME = 'rspt-cache-v1';
-const urlsToCache = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/icons/icon-192x192.png',
-  '/icons/icon-512x512.png'
-];
-
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(urlsToCache))
-  );
-});
-
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => response || fetch(event.request))
-  );
-}); 
+if(!self.define){let e,i={};const n=(n,s)=>(n=new URL(n+".js",s).href,i[n]||new Promise((i=>{if("document"in self){const e=document.createElement("script");e.src=n,e.onload=i,document.head.appendChild(e)}else e=n,importScripts(n),i()})).then((()=>{let e=i[n];if(!e)throw new Error(`Module ${n} didn’t register its module`);return e})));self.define=(s,r)=>{const c=e||("document"in self?document.currentScript.src:"")||location.href;if(i[c])return;let o={};const d=e=>n(e,c),t={module:{uri:c},exports:o,require:d};i[c]=Promise.all(s.map((e=>t[e]||d(e)))).then((e=>(r(...e),o)))}}define(["./workbox-5ffe50d4"],(function(e){"use strict";self.skipWaiting(),e.clientsClaim(),e.precacheAndRoute([{url:"404.html",revision:"d56cc7cb6a22db67e60f67dd286296a4"},{url:"assets/index-C9RbNn4c.css",revision:null},{url:"assets/index-Dh8nJ4SS.js",revision:null},{url:"index.html",revision:"dcd7e5ff3b9c10d0664d5305571f4dc3"},{url:"registerSW.js",revision:"ed1b71c55db1eb2d874e452ff20f1021"},{url:"icons/icon-192x192.png",revision:"578c800c59d915790fca60b2df26501c"},{url:"icons/icon-512x512.png",revision:"59605555a3ced4ea6ab4cb95f7b2a41a"},{url:"manifest.webmanifest",revision:"40023ccbdebf635ff9220453c29d65d7"}],{}),e.cleanupOutdatedCaches(),e.registerRoute(new e.NavigationRoute(e.createHandlerBoundToURL("index.html")))}));
+//# sourceMappingURL=sw.js.map
